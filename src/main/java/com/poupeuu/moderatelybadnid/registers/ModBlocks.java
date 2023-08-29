@@ -14,4 +14,5 @@ public class ModBlocks {
     public static final DeferredRegister<Block> REGISTER = DeferredRegister.create(ForgeRegistries.BLOCKS, ModeratelyBadNid.MODID);
     public static final RegistryObject<Block> RED_BLOCK = REGISTER.register("red_block", () -> new RedBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED)));
     public static final RegistryObject<Block> TOASTER = REGISTER.register("toaster", () -> new ToasterBlock(BlockBehaviour.Properties.of().noOcclusion()));
+    public static final RegistryObject<Block> RADIO = REGISTER.register("radio", () -> new ToasterBlock(BlockBehaviour.Properties.of().noOcclusion()));
 }
