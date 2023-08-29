@@ -1,0 +1,14 @@
+{
+  "block.toaster.toaster_start": {
+    "subtitle": "subtitle.moderatelybadnid.toaster_start",
+    "sounds": [
+      "moderatelybadnid:block/toaster/toaster_start"
+    ]
+  },
+  "block.toaster.toaster_end": {
+    "subtitle": "subtitle.moderatelybadnid.toaster_end",
+    "sounds": [
+      "moderatelybadnid:block/toaster/toaster_end"
+    ]
+  }
+}

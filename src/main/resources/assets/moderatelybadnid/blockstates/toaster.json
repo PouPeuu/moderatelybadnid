@@ -1,0 +1,36 @@
+{
+  "variants": {
+    "facing=north,toasting=false": {
+      "model": "moderatelybadnid:block/toaster",
+      "y": 0
+    },
+    "facing=east,toasting=false": {
+      "model": "moderatelybadnid:block/toaster",
+      "y": 90
+    },
+    "facing=south,toasting=false": {
+      "model": "moderatelybadnid:block/toaster",
+      "y": 180
+    },
+    "facing=west,toasting=false": {
+      "model": "moderatelybadnid:block/toaster",
+      "y": 270
+    },
+    "facing=north,toasting=true": {
+      "model": "moderatelybadnid:block/toaster_toasting",
+      "y": 0
+    },
+    "facing=east,toasting=true": {
+      "model": "moderatelybadnid:block/toaster_toasting",
+      "y": 90
+    },
+    "facing=south,toasting=true": {
+      "model": "moderatelybadnid:block/toaster_toasting",
+      "y": 180
+    },
+    "facing=west,toasting=true": {
+      "model": "moderatelybadnid:block/toaster_toasting",
+      "y": 270
+    }
+  }
+}
