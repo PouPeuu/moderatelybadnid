@@ -6,6 +6,7 @@ import com.poupeuu.moderatelybadnid.registers.ModBlockEntities;
 import com.poupeuu.moderatelybadnid.registers.ModItems;
 import com.poupeuu.moderatelybadnid.registers.ModSounds;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -37,6 +39,17 @@ public class ModeratelyBadNid
     // Define mod id in a common place for everything to reference
     public static final String MODID = "moderatelybadnid";
     private static final Logger LOGGER = LogUtils.getLogger();
+    private float lastCameraPitch = 0;
+    private float lastCameraYaw = 0;
+    private static boolean lockCamera = false;
+
+    public static void setCameraLocked(boolean value){
+        lockCamera = value;
+    }
+
+    public static boolean getCameraLocked(){
+        return lockCamera;
+    }
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
     public static final RegistryObject<CreativeModeTab> TAB = CREATIVE_MODE_TABS.register("moderatelybadnid", () -> CreativeModeTab.builder()
@@ -75,5 +88,29 @@ public class ModeratelyBadNid
         if (player != null) {
             player.sendSystemMessage(Component.literal(message));
         }
+    }
+    @SubscribeEvent
+    public void onCameraSetup(ViewportEvent.ComputeCameraAngles event){
+        //this.sendChatMessage(String.valueOf(event.getPitch()));
+        //this.sendChatMessage(String.valueOf(event.getYaw()));
+
+        float pitch = event.getPitch();
+        float yaw = event.getYaw();
+
+        float deltaPitch = pitch - this.lastCameraPitch;
+        float deltaYaw = yaw - this.lastCameraYaw;
+
+        if(this.lockCamera){
+            event.setPitch(lastCameraPitch);
+            event.setYaw(lastCameraYaw);
+            pitch = event.getPitch();
+            yaw = event.getYaw();
+            LocalPlayer player = Minecraft.getInstance().player;
+            player.setYRot(lastCameraYaw);
+            player.setXRot(lastCameraPitch);
+        }
+
+        this.lastCameraPitch = pitch;
+        this.lastCameraYaw = yaw;
     }
 }
