@@ -42,6 +42,7 @@ public class ModeratelyBadNid
     public static final RegistryObject<CreativeModeTab> TAB = CREATIVE_MODE_TABS.register("moderatelybadnid", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> ModItems.TOASTER_ITEM.get().getDefaultInstance())
+            .title(Component.translatable("itemGroup.moderatelybadnid"))
             .displayItems((parameters, output) -> {
                 output.accept(ModItems.RED_BLOCK_ITEM.get());
                 output.accept(ModItems.TOASTER_ITEM.get());
