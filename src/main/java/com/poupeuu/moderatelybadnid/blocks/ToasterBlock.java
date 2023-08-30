@@ -62,8 +62,6 @@ public class ToasterBlock extends BaseEntityBlock{
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext){
         //return SHAPE;
         switch ((Direction)blockState.getValue(FACING)) {
-            case NORTH, SOUTH:
-                return SHAPE_Z;
             case EAST, WEST:
                 return SHAPE_X;
             default:
