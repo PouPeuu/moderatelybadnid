@@ -4,6 +4,7 @@ import com.poupeuu.moderatelybadnid.ModeratelyBadNid;
 import com.poupeuu.moderatelybadnid.registers.ModBlockEntities;
 import com.poupeuu.moderatelybadnid.blocks.blockEntities.ToasterBlockEntity;
 import com.poupeuu.moderatelybadnid.registers.ModSounds;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -35,8 +36,8 @@ public class ToasterBlock extends BaseEntityBlock{
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty TOASTING = BooleanProperty.create("toasting");
 
-    protected static final VoxelShape SHAPE_NORTH = Block.box(4,0,1, 12, 11,15);
-    protected static final VoxelShape SHAPE_WEST = Block.box(1,0,4, 15, 11,12);
+    protected static final VoxelShape SHAPE_Z = Block.box(4,0,1, 12, 11,15);
+    protected static final VoxelShape SHAPE_X = Block.box(1,0,4, 15, 11,12);
     public ToasterBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH));
@@ -61,16 +62,12 @@ public class ToasterBlock extends BaseEntityBlock{
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext){
         //return SHAPE;
         switch ((Direction)blockState.getValue(FACING)) {
-            case NORTH:
-                return SHAPE_NORTH;
-            case SOUTH:
-                return SHAPE_NORTH;
-            case EAST:
-                return SHAPE_WEST;
-            case WEST:
-                return SHAPE_WEST;
+            case NORTH, SOUTH:
+                return SHAPE_Z;
+            case EAST, WEST:
+                return SHAPE_X;
             default:
-                return SHAPE_NORTH;
+                return SHAPE_Z;
          }
     }
 
