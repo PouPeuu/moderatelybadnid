@@ -45,6 +45,7 @@ public class ModeratelyBadNid
             .displayItems((parameters, output) -> {
                 output.accept(ModItems.RED_BLOCK_ITEM.get());
                 output.accept(ModItems.TOASTER_ITEM.get());
+                output.accept(ModItems.RADIO_ITEM.get());
             }).build());
 
     public ModeratelyBadNid()

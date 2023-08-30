@@ -11,4 +11,5 @@ public class ModItems {
     public static final DeferredRegister<Item> REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, ModeratelyBadNid.MODID);
     public static final RegistryObject<Item> RED_BLOCK_ITEM = REGISTER.register("red_block", () -> new BlockItem(ModBlocks.RED_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> TOASTER_ITEM = REGISTER.register("toaster", () -> new BlockItem(ModBlocks.TOASTER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RADIO_ITEM = REGISTER.register("radio", () -> new BlockItem(ModBlocks.RADIO.get(), new Item.Properties()));
 }
