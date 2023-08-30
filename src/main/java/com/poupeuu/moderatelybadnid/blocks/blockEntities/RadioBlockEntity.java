@@ -17,6 +17,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 
 public class RadioBlockEntity extends BlockEntity {
+    private static boolean selected = false;
     public RadioBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.RADIO_BLOCK_ENTITY.get(), blockPos, blockState);
     }
@@ -29,10 +30,19 @@ public class RadioBlockEntity extends BlockEntity {
                 HitResult result = player.pick(4.6, 0.0f, false);
                 if (result.getType() == HitResult.Type.BLOCK && level.getBlockState(((BlockHitResult) result).getBlockPos()).is(ModBlocks.RADIO.get())) {
                     ModeratelyBadNid.setCameraLocked(true);
+                    selected = true;
                 }
             }
         } else {
             ModeratelyBadNid.setCameraLocked(false);
+            selected = false;
+        }
+
+        if (selected){
+            float deltaPitch = -ModeratelyBadNid.getDeltaPitch();
+            if(deltaPitch!=0) {
+                ModeratelyBadNid.sendChatMessage(String.valueOf(deltaPitch));
+            }
         }
     }
 }
