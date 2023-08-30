@@ -41,6 +41,8 @@ public class ModeratelyBadNid
     private static final Logger LOGGER = LogUtils.getLogger();
     private float lastCameraPitch = 0;
     private float lastCameraYaw = 0;
+    private static float deltaPitch = 0;
+    private static float deltaYaw = 0;
     private static boolean lockCamera = false;
 
     public static void setCameraLocked(boolean value){
@@ -89,6 +91,15 @@ public class ModeratelyBadNid
             player.sendSystemMessage(Component.literal(message));
         }
     }
+
+    public static float getDeltaPitch() {
+        return deltaPitch;
+    }
+
+    public static float getDeltaYaw() {
+        return deltaYaw;
+    }
+
     @SubscribeEvent
     public void onCameraSetup(ViewportEvent.ComputeCameraAngles event){
         //this.sendChatMessage(String.valueOf(event.getPitch()));
@@ -97,8 +108,8 @@ public class ModeratelyBadNid
         float pitch = event.getPitch();
         float yaw = event.getYaw();
 
-        float deltaPitch = pitch - this.lastCameraPitch;
-        float deltaYaw = yaw - this.lastCameraYaw;
+        deltaPitch = pitch - this.lastCameraPitch;
+        deltaYaw = yaw - this.lastCameraYaw;
 
         if(this.lockCamera){
             event.setPitch(lastCameraPitch);
