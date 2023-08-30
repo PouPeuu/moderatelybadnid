@@ -39,7 +39,7 @@ public class ModeratelyBadNid
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
-    public static final RegistryObject<CreativeModeTab> TAB = CREATIVE_MODE_TABS.register("tab", () -> CreativeModeTab.builder()
+    public static final RegistryObject<CreativeModeTab> TAB = CREATIVE_MODE_TABS.register("moderatelybadnid", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> ModItems.TOASTER_ITEM.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
