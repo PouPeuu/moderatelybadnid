@@ -15,6 +15,7 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -31,6 +32,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(ModeratelyBadNid.MODID)
@@ -123,5 +126,14 @@ public class ModeratelyBadNid
 
         this.lastCameraPitch = pitch;
         this.lastCameraYaw = yaw;
+    }
+    
+    public static final ArrayList<String> alrsaid = new ArrayList<String>(256);
+    @SubscribeEvent
+    public void onRenderGuiOverlay(RenderGuiOverlayEvent.Pre event){
+        String name = event.getOverlay().id().getPath();
+        if (ModeratelyBadNid.getCameraLocked() && name == "crosshair"){
+            event.setCanceled(true);
+        }
     }
 }
