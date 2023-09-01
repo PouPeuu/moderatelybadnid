@@ -14,18 +14,16 @@ public class RadioSoundInstance extends AbstractTickableSoundInstance {
         super(soundEvent, soundSource, SoundInstance.createUnseededRandom());
         this.radio = radio;
         BlockPos pos = radio.getBlockPos();
-        this.x = pos.getX();
-        this.y = pos.getY();
-        this.z = pos.getZ();
+        x = pos.getX();
+        y = pos.getY();
+        z = pos.getZ();
+        looping = true;
+        delay = 0;
+        volume = 0.0F;
     }
 
     @Override
-    public void tick() {
+    public void tick(){
 
-    }
-
-    @Override
-    public boolean canPlaySound() {
-        return super.canPlaySound();
     }
 }
