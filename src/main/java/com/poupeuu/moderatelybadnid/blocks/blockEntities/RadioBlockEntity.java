@@ -1,6 +1,5 @@
 package com.poupeuu.moderatelybadnid.blocks.blockEntities;
 
-import com.ibm.icu.text.Normalizer2;
 import com.poupeuu.moderatelybadnid.ClientHandler;
 import com.poupeuu.moderatelybadnid.ModeratelyBadNid;
 import com.poupeuu.moderatelybadnid.registers.ModBlockEntities;
@@ -14,8 +13,6 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -126,15 +123,19 @@ public class RadioBlockEntity extends BlockEntity {
         }
     }
 
+    public ResourceLocation getSelectedSong(){
+        for (int i = 0; i < frequencies.length; i++){
+            if(Math.abs(frequency - frequencies[i])<=3.0){
+                return new ResourceLocation("minecraft", prefix+songs[i]);
+            }
+        }
+        return null;
+    }
+
     public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, RadioBlockEntity radioBlockEntity) {
         if(!initialized){
             initFrequencies(((ServerLevel)level).getSeed(), songs.length);
             initialized = true;
-        }
-        for (int i = 0; i < frequencies.length; i++){
-            if(Math.abs(frequency - frequencies[i])<=3.0){
-                level.playSound(null, blockPos, SoundEvent.createFixedRangeEvent(new ResourceLocation("minecraft", prefix+songs[i]), 10.0f), SoundSource.MUSIC);
-            }
         }
     }
 }
