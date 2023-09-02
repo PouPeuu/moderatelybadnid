@@ -135,7 +135,7 @@ public class RadioBlockEntity extends BlockEntity {
 
     private static SimpleSoundInstance getSelectedSong(){
         for (int i = 0; i < frequencies.length; i++){
-            if(Math.abs(frequency - frequencies[i])<=3.0){
+            if(Math.abs(frequency - frequencies[i])<=1.0){
                 return soundInstances[i];
             }
         }
