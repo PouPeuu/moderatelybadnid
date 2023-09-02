@@ -9,6 +9,7 @@ import com.poupeuu.moderatelybadnid.util.Mathes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -33,7 +34,7 @@ public class RadioBlockEntity extends BlockEntity {
 
     private static final String prefix = "music_disc.";
     private static final String[] songs = {"13","cat","blocks","chirp","far","mall","mellohi","stal","strad","ward","11","wait","otherside","5","pigstep","relic"};
-    private static final RadioSoundInstance[] soundInstances = new RadioSoundInstance[songs.length];
+    private static final SimpleSoundInstance[] soundInstances = new SimpleSoundInstance[songs.length];
     private static final float[] frequencies = new float[songs.length];
     private static boolean initialized = false;
 
@@ -41,7 +42,7 @@ public class RadioBlockEntity extends BlockEntity {
     public RadioBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.RADIO_BLOCK_ENTITY.get(), blockPos, blockState);
         for (int i = 0; i < songs.length; i++){
-            soundInstances[i] = new RadioSoundInstance(this, SoundEvent.createVariableRangeEvent(new ResourceLocation("minecraft", prefix+songs[i])), SoundSource.MUSIC);
+            soundInstances[i] = SimpleSoundInstance.forMusic(SoundEvent.createVariableRangeEvent(new ResourceLocation("minecraft", prefix+songs[i])));
         }
     }
 
@@ -132,7 +133,7 @@ public class RadioBlockEntity extends BlockEntity {
         }
     }
 
-    private static RadioSoundInstance getSelectedSong(){
+    private static SimpleSoundInstance getSelectedSong(){
         for (int i = 0; i < frequencies.length; i++){
             if(Math.abs(frequency - frequencies[i])<=3.0){
                 return soundInstances[i];
@@ -147,19 +148,16 @@ public class RadioBlockEntity extends BlockEntity {
             initialized = true;
         }
 
-        RadioSoundInstance song = getSelectedSong();
+        SoundManager soundManager = Minecraft.getInstance().getSoundManager();
+        SimpleSoundInstance song = getSelectedSong();
         for(int i = 0; i < soundInstances.length; i++){
-            if(song != null){
-                if(soundInstances[i] == song && !song.isPlaying()) {
-                    song.setPlaying(true);
-                    Minecraft.getInstance().getSoundManager().play(song);
-                    continue;
-                }
+            if(song != null && soundInstances[i] == song && !soundManager.isActive(song)){
+                soundManager.play(song);
+                continue;
             }
-            if ((song == null || soundInstances[i].isPlaying()) && soundInstances[i] != song) {
-                Minecraft.getInstance().getSoundManager().stop(soundInstances[i]);
+            if (song == null || soundInstances[i] != song) {
+                soundManager.stop(soundInstances[i]);
             }
-            soundInstances[i].setPlaying(false);
         }
     }
 }
