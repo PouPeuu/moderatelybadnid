@@ -75,4 +75,10 @@ public class RadioBlock extends BaseEntityBlock {
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
+
+    @Override
+    public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState p_60518_, boolean p_60519_) {
+        ((RadioBlockEntity)level.getBlockEntity(blockPos)).stopAll();
+        super.onRemove(blockState, level, blockPos, p_60518_, p_60519_);
+    }
 }
