@@ -10,5 +10,11 @@
     "sounds": [
       "moderatelybadnid:block/toaster/toaster_end"
     ]
+  },
+  "block.radio.static": {
+    "subtitle": "subtitle.moderatelybadnid.radio_static",
+    "sounds": [
+      "moderatelybadnid:block/radio/static"
+    ]
   }
 }
