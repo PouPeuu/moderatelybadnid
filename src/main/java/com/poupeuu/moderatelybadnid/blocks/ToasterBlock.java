@@ -93,7 +93,7 @@ public class ToasterBlock extends BaseEntityBlock{
                 blockState = blockState.setValue(TOASTING, true);
                 level.setBlockAndUpdate(blockPos, blockState);
                 level.playSound(null, blockPos, ModSounds.TOASTER_START.get(), SoundSource.MASTER);
-                return InteractionResult.SUCCESS;
+                return InteractionResult.sidedSuccess(level.isClientSide());
             }
             Optional<CampfireCookingRecipe> optional = toasterBlockEntity.getCookableRecipe(itemStack);
             if(optional.isPresent()) {
