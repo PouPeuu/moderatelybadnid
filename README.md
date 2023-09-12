@@ -3,4 +3,4 @@
 If the answer is yes to either of those, this mod is not for you. This mod is only **moderately** bad.
 
 
-this mod has caused me unimaginable suffering
+this mod has caused me unimaginable joy and happiness :)
