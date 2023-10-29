@@ -11,7 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModBlocks {
+public class MBNBlocks {
     public static final DeferredRegister<Block> REGISTER = DeferredRegister.create(ForgeRegistries.BLOCKS, ModeratelyBadNid.MODID);
     public static final RegistryObject<Block> RED_BLOCK = REGISTER.register("red_block", () -> new RedBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED)));
     public static final RegistryObject<Block> TOASTER = REGISTER.register("toaster", () -> new ToasterBlock(BlockBehaviour.Properties.of().noOcclusion()));

@@ -1,10 +1,9 @@
 package com.poupeuu.moderatelybadnid.blocks;
 
 import com.poupeuu.moderatelybadnid.blocks.blockEntities.RadioBlockEntity;
-import com.poupeuu.moderatelybadnid.registers.ModBlockEntities;
+import com.poupeuu.moderatelybadnid.registers.MBNBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -34,9 +33,9 @@ public class RadioBlock extends BaseEntityBlock {
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
         if (level.isClientSide) {
-            return createTickerHelper(blockEntityType, ModBlockEntities.RADIO_BLOCK_ENTITY.get(), RadioBlockEntity::clientTick);
+            return createTickerHelper(blockEntityType, MBNBlockEntities.RADIO_BLOCK_ENTITY.get(), RadioBlockEntity::clientTick);
         } else {
-            return createTickerHelper(blockEntityType, ModBlockEntities.RADIO_BLOCK_ENTITY.get(), RadioBlockEntity::serverTick);
+            return createTickerHelper(blockEntityType, MBNBlockEntities.RADIO_BLOCK_ENTITY.get(), RadioBlockEntity::serverTick);
         }
     }
 

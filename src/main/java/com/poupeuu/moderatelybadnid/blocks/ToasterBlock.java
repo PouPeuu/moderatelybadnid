@@ -1,10 +1,8 @@
 package com.poupeuu.moderatelybadnid.blocks;
 
-import com.poupeuu.moderatelybadnid.ModeratelyBadNid;
-import com.poupeuu.moderatelybadnid.registers.ModBlockEntities;
+import com.poupeuu.moderatelybadnid.registers.MBNBlockEntities;
 import com.poupeuu.moderatelybadnid.blocks.blockEntities.ToasterBlockEntity;
-import com.poupeuu.moderatelybadnid.registers.ModSounds;
-import net.minecraft.client.renderer.blockentity.SignRenderer;
+import com.poupeuu.moderatelybadnid.registers.MBNSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -80,7 +78,7 @@ public class ToasterBlock extends BaseEntityBlock{
             // todo: add particles
             return null;
         } else {
-            return blockState.getValue(TOASTING) ? createTickerHelper(blockEntityType, ModBlockEntities.TOASTER_BLOCK_ENTITY.get(), ToasterBlockEntity::cookTick) : null;
+            return blockState.getValue(TOASTING) ? createTickerHelper(blockEntityType, MBNBlockEntities.TOASTER_BLOCK_ENTITY.get(), ToasterBlockEntity::cookTick) : null;
         }
     }
 
@@ -92,7 +90,7 @@ public class ToasterBlock extends BaseEntityBlock{
             if (itemStack.isEmpty() && !toasterBlockEntity.getItems().isEmpty()) {
                 blockState = blockState.setValue(TOASTING, true);
                 level.setBlockAndUpdate(blockPos, blockState);
-                level.playSound(null, blockPos, ModSounds.TOASTER_START.get(), SoundSource.MASTER);
+                level.playSound(null, blockPos, MBNSounds.TOASTER_START.get(), SoundSource.MASTER);
                 return InteractionResult.sidedSuccess(level.isClientSide());
             }
             Optional<CampfireCookingRecipe> optional = toasterBlockEntity.getCookableRecipe(itemStack);

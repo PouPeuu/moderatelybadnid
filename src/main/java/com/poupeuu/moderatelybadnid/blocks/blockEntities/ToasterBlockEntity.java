@@ -1,9 +1,8 @@
 package com.poupeuu.moderatelybadnid.blocks.blockEntities;
 
-import com.poupeuu.moderatelybadnid.ModeratelyBadNid;
 import com.poupeuu.moderatelybadnid.blocks.ToasterBlock;
-import com.poupeuu.moderatelybadnid.registers.ModBlockEntities;
-import com.poupeuu.moderatelybadnid.registers.ModSounds;
+import com.poupeuu.moderatelybadnid.registers.MBNBlockEntities;
+import com.poupeuu.moderatelybadnid.registers.MBNSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -34,7 +33,7 @@ public class ToasterBlockEntity extends BlockEntity {
     private int progress = 0;
 
     public ToasterBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.TOASTER_BLOCK_ENTITY.get(), blockPos, blockState);
+        super(MBNBlockEntities.TOASTER_BLOCK_ENTITY.get(), blockPos, blockState);
     }
 
     protected void saveAdditional(CompoundTag tag) {
@@ -95,7 +94,7 @@ public class ToasterBlockEntity extends BlockEntity {
 
                 blockState = blockState.setValue(ToasterBlock.TOASTING, false);
                 level.setBlockAndUpdate(blockPos, blockState);
-                level.playSound(null, blockPos, ModSounds.TOASTER_END.get(), SoundSource.MASTER);
+                level.playSound(null, blockPos, MBNSounds.TOASTER_END.get(), SoundSource.MASTER);
             }
         }
     }

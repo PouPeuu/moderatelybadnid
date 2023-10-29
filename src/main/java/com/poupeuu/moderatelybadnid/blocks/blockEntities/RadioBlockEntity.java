@@ -2,9 +2,9 @@ package com.poupeuu.moderatelybadnid.blocks.blockEntities;
 
 import com.poupeuu.moderatelybadnid.ClientHandler;
 import com.poupeuu.moderatelybadnid.ModeratelyBadNid;
-import com.poupeuu.moderatelybadnid.registers.ModBlockEntities;
-import com.poupeuu.moderatelybadnid.registers.ModBlocks;
-import com.poupeuu.moderatelybadnid.registers.ModSounds;
+import com.poupeuu.moderatelybadnid.registers.MBNBlockEntities;
+import com.poupeuu.moderatelybadnid.registers.MBNBlocks;
+import com.poupeuu.moderatelybadnid.registers.MBNSounds;
 import com.poupeuu.moderatelybadnid.util.Mathes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -17,8 +17,6 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -44,10 +42,10 @@ public class RadioBlockEntity extends BlockEntity {
 
 
     public RadioBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.RADIO_BLOCK_ENTITY.get(), blockPos, blockState);
-        staticSoundInstance = new SimpleSoundInstance(ModSounds.STATIC.get().getLocation(), SoundSource.MUSIC, 0.25f, 1.0f, SoundInstance.createUnseededRandom(), true, 0, SoundInstance.Attenuation.NONE, (double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), true);
+        super(MBNBlockEntities.RADIO_BLOCK_ENTITY.get(), blockPos, blockState);
+        staticSoundInstance = new SimpleSoundInstance(MBNSounds.STATIC.get().getLocation(), SoundSource.RECORDS, 0.25f, 1.0f, SoundInstance.createUnseededRandom(), true, 0, SoundInstance.Attenuation.LINEAR, (double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), true);
         for (int i = 0; i < songs.length; i++){
-            soundInstances[i] = new SimpleSoundInstance(new ResourceLocation("minecraft",prefix+songs[i]), SoundSource.MUSIC, 0.5f, 1.0f, SoundInstance.createUnseededRandom(), true, 0, SoundInstance.Attenuation.NONE, (double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), true);
+            soundInstances[i] = new SimpleSoundInstance(new ResourceLocation("minecraft",prefix+songs[i]), SoundSource.RECORDS, 0.5f, 1.0f, SoundInstance.createUnseededRandom(), true, 0, SoundInstance.Attenuation.LINEAR, (double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), true);
         }
     }
 
@@ -115,7 +113,7 @@ public class RadioBlockEntity extends BlockEntity {
         if(ClientHandler.isMouseButtonDown(1)) {
             if (!player.isShiftKeyDown()) {
                 HitResult result = player.pick(4.6, 0.0f, false);
-                if (result.getType() == HitResult.Type.BLOCK && level.getBlockState(((BlockHitResult) result).getBlockPos()).is(ModBlocks.RADIO.get())) {
+                if (result.getType() == HitResult.Type.BLOCK && level.getBlockState(((BlockHitResult) result).getBlockPos()).is(MBNBlocks.RADIO.get())) {
                     ModeratelyBadNid.setCameraLocked(true);
                     selected = true;
                 }
@@ -145,7 +143,18 @@ public class RadioBlockEntity extends BlockEntity {
             initFrequencies(songs.length);
             initialized = true;
         }
+    }
 
+    private static SimpleSoundInstance getSelectedSong(){
+        for (int i = 0; i < frequencies.length; i++){
+            if(Math.abs(frequency - frequencies[i])<=2){
+                return soundInstances[i];
+            }
+        }
+        return null;
+    }
+
+    public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, RadioBlockEntity radioBlockEntity) {
         SoundManager soundManager = Minecraft.getInstance().getSoundManager();
         SimpleSoundInstance song = getSelectedSong();
         for(int i = 0; i < soundInstances.length; i++){
@@ -165,18 +174,5 @@ public class RadioBlockEntity extends BlockEntity {
         if(!soundManager.isActive(song) && !soundManager.isActive(staticSoundInstance)){
             soundManager.play(staticSoundInstance);
         }
-    }
-
-    private static SimpleSoundInstance getSelectedSong(){
-        for (int i = 0; i < frequencies.length; i++){
-            if(Math.abs(frequency - frequencies[i])<=2){
-                return soundInstances[i];
-            }
-        }
-        return null;
-    }
-
-    public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, RadioBlockEntity radioBlockEntity) {
-
     }
 }

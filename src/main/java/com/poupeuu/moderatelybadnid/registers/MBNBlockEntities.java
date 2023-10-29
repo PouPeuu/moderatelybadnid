@@ -8,10 +8,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModBlockEntities {
+public class MBNBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ModeratelyBadNid.MODID);
 
-    public static final RegistryObject<BlockEntityType<ToasterBlockEntity>> TOASTER_BLOCK_ENTITY = REGISTER.register("toaster", () -> BlockEntityType.Builder.of(ToasterBlockEntity::new, ModBlocks.TOASTER.get()).build(null));
-    public static final RegistryObject<BlockEntityType<RadioBlockEntity>> RADIO_BLOCK_ENTITY = REGISTER.register("radio", () -> BlockEntityType.Builder.of(RadioBlockEntity::new, ModBlocks.RADIO.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ToasterBlockEntity>> TOASTER_BLOCK_ENTITY = REGISTER.register("toaster", () -> BlockEntityType.Builder.of(ToasterBlockEntity::new, MBNBlocks.TOASTER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<RadioBlockEntity>> RADIO_BLOCK_ENTITY = REGISTER.register("radio", () -> BlockEntityType.Builder.of(RadioBlockEntity::new, MBNBlocks.RADIO.get()).build(null));
 
 }
