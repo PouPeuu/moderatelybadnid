@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "moderatelybadnid:block/glort_bottom"
+    },
+    "half=upper": {
+      "model": "moderatelybadnid:block/glort_top"
+    }
+  }
+}

@@ -31,7 +31,7 @@ public class ModeratelyBadNid
 {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "moderatelybadnid";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     private float lastCameraPitch = 0;
     private float lastCameraYaw = 0;
     private static float deltaPitch = 0;
@@ -55,6 +55,7 @@ public class ModeratelyBadNid
                 output.accept(MBNItems.RED_BLOCK_ITEM.get());
                 output.accept(MBNItems.TOASTER_ITEM.get());
                 output.accept(MBNItems.RADIO_ITEM.get());
+                output.accept(MBNItems.GLORT_ITEM.get());
             }).build());
 
     public ModeratelyBadNid()
