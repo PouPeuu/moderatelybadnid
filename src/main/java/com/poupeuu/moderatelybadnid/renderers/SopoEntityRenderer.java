@@ -14,15 +14,12 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
-public class SopoEntityRenderer extends EntityRenderer<SopoEntity> {
+public class SopoEntityRenderer extends MobRenderer<SopoEntity, SopoModel<SopoEntity>> {
 
     private static final ResourceLocation textureLoc = new ResourceLocation(ModeratelyBadNid.MODID, "textures/model/sopo_texture.png");
-    private final SopoModel sopoModel;
 
-    public SopoEntityRenderer(EntityRendererProvider.Context context) {
-        super(context);
-        this.shadowRadius = 0.0f;
-        this.sopoModel = new SopoModel(context.bakeLayer(SopoModel.LAYER_LOCATION));
+    public SopoEntityRenderer(EntityRendererProvider.Context context, SopoModel<SopoEntity> model) {
+        super(context, model, 0.7F);
     }
 
     public void render(SopoEntity entity, float sopoYaw, float partialTicks, PoseStack poseStack, MultiBufferSource source, int light){
