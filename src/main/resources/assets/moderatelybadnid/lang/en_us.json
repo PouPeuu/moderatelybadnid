@@ -5,5 +5,7 @@
   "block.moderatelybadnid.radio": "Radio",
   "subtitle.moderatelybadnid.toaster_start": "Toaster start",
   "subtitle.moderatelybadnid.toaster_end": "Toaster end",
-  "subtitle.moderatelybadnid.radio_static": "Radio Static"
+  "subtitle.moderatelybadnid.radio_static": "Radio Static",
+  "block.moderatelybadnid.glort": "Glört",
+  "item.moderatelybadnid.gleem_bottle": "Gleem Bottle"
 }
